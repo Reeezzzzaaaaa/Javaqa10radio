@@ -20,12 +20,18 @@ public class Radio {
    }
 
    public void increaseVolume() {
-      int target = currentVolume + 1;
+      int target = currentVolume;
+      if (currentVolume < 10) {
+         target = currentVolume + 1;
+      }
       setCurrentVolume(target);
    }
 
    public void decreaseVolume() {
-      int target = currentVolume - 1;
+      int target = currentVolume;
+      if (currentVolume > 0) {
+         target = currentVolume - 1;
+      }
       setCurrentVolume(target);
    }
 
@@ -37,18 +43,23 @@ public class Radio {
       return currentChannel;
    }
 
-   public void setCurrentChannel(int newCurrentChannel) {
-      if (newCurrentChannel < -1) {
-         return;
+   int channelMin = 0;
+   int channelMax = 9;
+   public int setCurrentChannel(int newCurrentChannel) {
+      if (newCurrentChannel < 0) {
+         currentChannel = channelMin;
+         return currentChannel;
       }
-      if (newCurrentChannel > 10) {
-         return;
+      if (newCurrentChannel > 9) {
+         currentChannel = channelMax;
+         return currentChannel;
       }
       currentChannel = newCurrentChannel;
+      return currentChannel;
    }
 
    public void nextChannel() {
-      int target = currentChannel + 1;
+      int target = currentChannel + 1 ;
       if (target >= 10) {
          target = 0;
       }
@@ -57,7 +68,7 @@ public class Radio {
 
    public void prevChannel() {
       int target = currentChannel - 1;
-      if (target <= -1) {
+      if (target < 0) {
          target = 9;
       }
       setCurrentChannel(target);
