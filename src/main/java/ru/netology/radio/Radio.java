@@ -2,26 +2,77 @@ package ru.netology.radio;
 
 public class Radio {
 
-   //Громкость
-   public int currentVolume;
+   private int maxVolume = 10;
+   private int minVolume = 0;
+   private int maxChannel = 9;
+   private int minChannel = 0;
+   private int currentVolume = minVolume;
+   private int currentChannel = minChannel;
+
+   public Radio(int min, int max) {
+      this.minVolume = min;
+      this.maxVolume = max;
+      this.minChannel = min;
+      this.maxChannel = max;
+      this.currentVolume = minVolume;
+      this.currentChannel = minChannel;
+   }
+
+   public Radio(int amount) {
+      maxVolume = minVolume + amount;
+      maxChannel = minChannel + (amount - 1);
+   }
+
 
    public int getCurrentVolume() {
       return currentVolume;
    }
-
    public void setCurrentVolume(int newCurrentVolume) {
-      if (newCurrentVolume < 0) {
+      if (newCurrentVolume < minVolume) {
          return;
       }
-      if (newCurrentVolume > 10) {
+      if (newCurrentVolume > maxVolume) {
          return;
       }
       currentVolume = newCurrentVolume;
    }
 
+   public int getCurrentChannel() {
+      return currentChannel;
+   }
+   public int setCurrentChannel(int newCurrentChannel) {
+      if (newCurrentChannel < minChannel) {
+         currentChannel = minChannel;
+         return currentChannel;
+      }
+      if (newCurrentChannel > maxChannel) {
+         currentChannel = maxChannel;
+         return currentChannel;
+      }
+      currentChannel = newCurrentChannel;
+      return currentChannel;
+   }
+
+   public int getMaxVolume() {
+      return maxVolume;
+   }
+
+   public int getMinVolume() {
+      return minVolume;
+   }
+
+   public int getMaxChannel() {
+      return maxChannel;
+   }
+
+   public int getMinChannel() {
+      return minChannel;
+   }
+
+
    public void increaseVolume() {
       int target = currentVolume;
-      if (currentVolume < 10) {
+      if (currentVolume < maxVolume) {
          target = currentVolume + 1;
       }
       setCurrentVolume(target);
@@ -29,47 +80,24 @@ public class Radio {
 
    public void decreaseVolume() {
       int target = currentVolume;
-      if (currentVolume > 0) {
+      if (currentVolume > minVolume) {
          target = currentVolume - 1;
       }
       setCurrentVolume(target);
    }
 
-
-   //Радиостанция
-   public int currentChannel;
-
-   public int getCurrentChannel() {
-      return currentChannel;
-   }
-
-   int channelMin = 0;
-   int channelMax = 9;
-   public int setCurrentChannel(int newCurrentChannel) {
-      if (newCurrentChannel < 0) {
-         currentChannel = channelMin;
-         return currentChannel;
-      }
-      if (newCurrentChannel > 9) {
-         currentChannel = channelMax;
-         return currentChannel;
-      }
-      currentChannel = newCurrentChannel;
-      return currentChannel;
-   }
-
    public void nextChannel() {
-      int target = currentChannel + 1 ;
-      if (target >= 10) {
-         target = 0;
+      int target = currentChannel + 1;
+      if (target > maxChannel) {
+         target = minChannel;
       }
       setCurrentChannel(target);
    }
 
    public void prevChannel() {
       int target = currentChannel - 1;
-      if (target < 0) {
-         target = 9;
+      if (target < minChannel) {
+         target = maxChannel;
       }
       setCurrentChannel(target);
    }
