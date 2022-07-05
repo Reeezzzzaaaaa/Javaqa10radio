@@ -1,11 +1,5 @@
 package ru.netology.radio;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
-@AllArgsConstructor
-@Data
-
 public class Radio {
 
 
@@ -13,8 +7,6 @@ public class Radio {
     private int maxNoise = 10;
     private int minChannel = 0;
     private int maxChannel = 9;
-    private int newMaxVolume;
-    private int amount;
     private int increaseVolume;
     private int decreaseVolume;
     private int nextChannel;
@@ -26,21 +18,24 @@ public class Radio {
     }
 
     public Radio(int amount) {
-        Radio radio = new Radio();
-        this.amount = amount;
-        this.amount = radio.setAmount(this.amount);
+        maxChannel = minChannel + amount - 1;
+        this.currentChannel = maxChannel;
     }
 
     public int getMinNoise() {
         return minNoise;
     }
 
+    public int getMaxNoise() {
+        return maxNoise;
+    }
+
     public int getMinChannel() {
         return minChannel;
     }
 
-    public int getAmount() {
-        return amount;
+    public int getMaxChannel() {
+        return maxChannel;
     }
 
     public int getIncreaseVolume() {
@@ -67,11 +62,24 @@ public class Radio {
         return currentChannel;
     }
 
-    public int setAmount(int amount) {
-        maxChannel = amount;
-        amount = maxChannel - minChannel - 1;
-        this.amount = amount;
-        return amount;
+    public void setMinNoise(int minNoise) {
+        this.minNoise = minNoise;
+        this.currentVolume = minNoise;
+    }
+
+    public void setMaxNoise(int maxNoise) {
+        this.maxNoise = maxNoise;
+        this.currentVolume = maxNoise;
+    }
+
+    public void setMinChannel(int minChannel) {
+        this.minChannel = minChannel;
+        this.currentChannel = minChannel;
+    }
+
+    public void setMaxChannel(int maxChannel) {
+        this.maxChannel = maxChannel - 1;
+        this.currentChannel = maxChannel - 1;
     }
 
     public void setCurrentVolume(int currentVolume) {
@@ -119,10 +127,12 @@ public class Radio {
 
     public void setDecreaseVolume(int decreaseVolume) {
         int target = decreaseVolume;
+        if (target <= maxNoise) {
+            target--;
+            decreaseVolume = target;
+        }
         if (target > maxNoise) {
             target = maxNoise;
-        }
-        if (target <= maxNoise) {
             target--;
             decreaseVolume = target;
         }

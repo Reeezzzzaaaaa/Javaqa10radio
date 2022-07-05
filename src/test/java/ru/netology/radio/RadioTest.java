@@ -7,13 +7,35 @@ public class RadioTest {
 
 
     @Test
-    public void testNewRadioVolume() {
+    public void testNewRadioMaxVolume() {
         Radio radio = new Radio();
-        radio.setNewMaxVolume(100);
+        radio.setMaxNoise(100);
 
-        Assertions.assertEquals(0, radio.getMinNoise());
-        Assertions.assertEquals(100, radio.getNewMaxVolume());
-        Assertions.assertEquals(0, radio.getCurrentVolume());
+        Assertions.assertEquals(100, radio.getMaxNoise());
+    }
+
+    @Test
+    public void testNewRadioMinVolume() {
+        Radio radio = new Radio();
+        radio.setMinNoise(-10);
+
+        Assertions.assertEquals(-10, radio.getMinNoise());
+    }
+
+    @Test
+    public void testNewRadioMaxChannel() {
+        Radio radio = new Radio();
+        radio.setMaxChannel(100);
+
+        Assertions.assertEquals(99, radio.getMaxChannel());
+    }
+
+    @Test
+    public void testNewRadioMinChannel() {
+        Radio radio = new Radio();
+        radio.setMinChannel(-10);
+
+        Assertions.assertEquals(-10, radio.getMinChannel());
     }
 
 
@@ -22,8 +44,7 @@ public class RadioTest {
         Radio radio = new Radio(30);
 
         Assertions.assertEquals(0, radio.getMinChannel());
-        Assertions.assertEquals(29, radio.getAmount());
-        Assertions.assertEquals(0, radio.getCurrentChannel());
+        Assertions.assertEquals(29, radio.getCurrentChannel());
     }
 
     @Test
