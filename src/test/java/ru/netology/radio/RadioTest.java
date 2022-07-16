@@ -8,7 +8,9 @@ public class RadioTest {
 
     @Test
     public void testNewRadioVolume() {
-        Radio radio = new Radio(0, 100);
+        Radio radio = new Radio();
+
+        radio.setNewMaxVolume(100);
 
         Assertions.assertEquals(0, radio.getMinVolume());
         Assertions.assertEquals(100, radio.getMaxVolume());
@@ -28,7 +30,7 @@ public class RadioTest {
 
     @Test
     public void shouldNotSetVolumeAboveMax() {
-        Radio radio = new Radio(0, 10);
+        Radio radio = new Radio();
 
         radio.setCurrentVolume(20);
 
@@ -41,7 +43,7 @@ public class RadioTest {
 
     @Test
     public void shouldIncreaseVolumeMines1() {
-        Radio radio = new Radio(0, 10);
+        Radio radio = new Radio();
         radio.setCurrentVolume(-1);
 
         radio.increaseVolume();
@@ -54,7 +56,7 @@ public class RadioTest {
 
     @Test
     public void shouldIncreaseVolume9() {
-        Radio radio = new Radio(0, 10);
+        Radio radio = new Radio();
         radio.setCurrentVolume(9);
 
         radio.increaseVolume();
@@ -67,7 +69,7 @@ public class RadioTest {
 
     @Test
     public void shouldIncreaseVolume10() {
-        Radio radio = new Radio(0, 10);
+        Radio radio = new Radio();
         radio.setCurrentVolume(10);
 
         radio.increaseVolume();
@@ -80,7 +82,7 @@ public class RadioTest {
 
     @Test
     public void shouldDecreaseVolume1() {
-        Radio radio = new Radio(0, 10);
+        Radio radio = new Radio();
         radio.setCurrentVolume(1);
 
         radio.decreaseVolume();
@@ -93,7 +95,7 @@ public class RadioTest {
 
     @Test
     public void shouldDecreaseVolume0() {
-        Radio radio = new Radio(0, 10);
+        Radio radio = new Radio();
         radio.setCurrentVolume(0);
 
         radio.decreaseVolume();
@@ -106,7 +108,7 @@ public class RadioTest {
 
     @Test
     public void shouldNextChannel8() {
-        Radio radio = new Radio(0, 9);
+        Radio radio = new Radio();
         radio.setCurrentChannel(8);
 
         radio.nextChannel();
@@ -119,7 +121,7 @@ public class RadioTest {
 
     @Test
     public void shouldNextChannel9() {
-        Radio radio = new Radio(0, 9);
+        Radio radio = new Radio();
         radio.setCurrentChannel(9);
 
         radio.nextChannel();
@@ -132,7 +134,7 @@ public class RadioTest {
 
     @Test
     public void shouldNextChannel10() {
-        Radio radio = new Radio(0, 9);
+        Radio radio = new Radio();
         radio.setCurrentChannel(10);
 
         radio.nextChannel();
@@ -145,7 +147,7 @@ public class RadioTest {
 
     @Test
     public void shouldPrevChannelMines1() {
-        Radio radio = new Radio(0, 9);
+        Radio radio = new Radio();
         radio.setCurrentChannel(-1);
 
         radio.prevChannel();
@@ -158,7 +160,7 @@ public class RadioTest {
 
     @Test
     public void shouldPrevChannel0() {
-        Radio radio = new Radio(0, 9);
+        Radio radio = new Radio();
         radio.setCurrentChannel(0);
 
         radio.prevChannel();
@@ -171,7 +173,7 @@ public class RadioTest {
 
     @Test
     public void shouldPrevChannel1() {
-        Radio radio = new Radio(0, 9);
+        Radio radio = new Radio();
         radio.setCurrentChannel(1);
 
         radio.prevChannel();
